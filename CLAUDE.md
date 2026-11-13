@@ -1,13 +1,9 @@
 # Project notes for Claude
 
-## Two places to update on every change
+## Where changes go
 
-This site lives in two places. **Every change must go to both:**
-
-1. **GitHub → Vercel (production):** commit to `main` in this repo. CI runs, then Vercel deploys to https://ftaguild.com
-2. **claude.ai artifact:** republish the changed files from `public/` to the artifact
-   `https://claude.ai/artifact/LNGtNLX8XuNaAEYf1rbmYq` (slug `9cd60b28-cc16-4427-be9a-4617afeb98c6`).
-   The artifact is shared publicly, so republish with `shared_live: "public"`.
+Production is the only copy: commit to `main` in this repo. CI runs, then Vercel deploys to https://ftaguild.com.
+(The old claude.ai artifact was retired on 2026-11-13; don't republish to it.)
 
 ## Before pushing
 
