@@ -163,6 +163,8 @@ textarea{min-height:96px;resize:vertical}
 .checks input{accent-color:var(--lapis);margin:0}
 .checks label:has(input:checked){border-color:var(--lapis);background:#E6ECFA}
 .form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.field-warn{color:var(--crimson);font-size:.875rem;font-weight:500;min-height:0}
+input[aria-invalid="true"]{border-color:var(--crimson);background:#fdf3f2}
 .error{color:var(--crimson);font-weight:500;font-size:.95rem}
 .result{grid-column:1/-1;display:none}
 .result.show{display:block}
@@ -386,10 +388,10 @@ body.intro-open{overflow:hidden}
       <div class="field"><label for="cls">Class</label>
         <select id="cls" name="cls" required>
           <option value="">Choose a class</option>
-          <option>Warrior</option><option>Paladin</option><option>Hunter</option><option>Rogue</option><option>Priest</option><option>Shaman</option><option>Mage</option><option>Warlock</option><option>Monk</option><option>Druid</option><option>Demon Hunter</option><option>Death Knight</option><option>Evoker</option>
+          <option>Druid</option><option>Hunter</option><option>Mage</option><option>Paladin</option><option>Priest</option><option>Rogue</option><option>Shaman</option><option>Warlock</option><option>Warrior</option>
         </select>
       </div>
-      <div class="field"><label for="lvl">Level</label><input id="lvl" name="lvl" type="number" min="1" max="90" inputmode="numeric"></div>
+      <div class="field"><label for="lvl">Level <em>(1–60)</em></label><input id="lvl" name="lvl" type="number" min="1" max="60" step="1" inputmode="numeric" aria-describedby="lvlWarn"><span class="field-warn" id="lvlWarn" role="alert"></span></div>
       <div class="field full"><span id="intLabel" style="font-weight:700;font-size:.95rem">What are you interested in?</span>
         <div class="checks" role="group" aria-labelledby="intLabel">
           <label><input type="checkbox" name="int" value="Raiding">Raiding</label>
@@ -495,6 +497,23 @@ $("#officers").innerHTML = GUILD.officers.map(o =>
 
 // application
 const form = $("#applyForm");
+const lvlInput = $("#lvl"), lvlWarn = $("#lvlWarn");
+function levelOk(){
+  const raw = lvlInput.value.trim();
+  if (lvlInput.validity.badInput) return false;          // letters typed into the number box
+  if (raw === "") return true;                          // level is optional
+  const n = Number(raw);
+  return Number.isInteger(n) && n >= 1 && n <= 60;
+}
+function checkLevel(){
+  const ok = levelOk();
+  lvlWarn.textContent = ok ? "" : "Use a valid level from 1 to 60.";
+  lvlInput.setAttribute("aria-invalid", ok ? "false" : "true");
+  if (!ok) $("#result").classList.remove("show");
+  return ok;
+}
+lvlInput.addEventListener("input", checkLevel);
+lvlInput.addEventListener("blur", checkLevel);
 form.addEventListener("submit", e => {
   e.preventDefault();
   const f = new FormData(form);
@@ -502,7 +521,16 @@ form.addEventListener("submit", e => {
   if (!f.get("char").trim()) missing.push("character name");
   if (!f.get("disc").trim()) missing.push("Discord username");
   if (!f.get("cls")) missing.push("class");
-  if (missing.length) { $("#formError").textContent = "Add your " + missing.join(", ") + " to continue."; $("#result").classList.remove("show"); return; }
+  const lvlBad = !checkLevel();
+  if (missing.length || lvlBad) {
+    const msgs = [];
+    if (missing.length) msgs.push("Add your " + missing.join(", ") + ".");
+    if (lvlBad) msgs.push("Use a valid level from 1 to 60.");
+    $("#formError").textContent = msgs.join(" ");
+    $("#result").classList.remove("show");
+    if (lvlBad && !missing.length) lvlInput.focus();
+    return;
+  }
   $("#formError").textContent = "";
   const ints = f.getAll("int");
   const text = [
