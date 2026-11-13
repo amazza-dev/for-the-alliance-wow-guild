@@ -4,7 +4,7 @@
 
 The website for **For the Alliance**, a friendly, semi-competitive World of Warcraft guild on **WoW Forever (PvP)**. Raiding, PvP events, and leveling help.
 
-It's a static site: one `index.html` plus images and music, no build step.
+Live at **https://ftaguild.com**. It's a static site: one `index.html` plus images and music, no build step.
 
 - Animated intro: the guild banner assembles itself (shield, lion rising and roaring, title, ribbon, weapons), then **Enter the realm** starts the guild theme.
 - Weekly schedule, raid info, guild code, officers, FAQ.
@@ -36,7 +36,7 @@ Run both locally with `npm run check`.
 
 ## Deploys (CD)
 
-Hosted on Vercel, same as Gulfside Gatherings. `vercel.json` serves `public/` with no build.
+Hosted on Vercel at **https://ftaguild.com** (`www.` and the old `for-the-alliance-wow-guild.vercel.app` address both redirect there). `vercel.json` serves `public/` with no build.
 
 - Push to `main` → production deploy
 - Open a pull request → preview deploy with its own URL

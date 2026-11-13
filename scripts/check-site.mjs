@@ -12,9 +12,20 @@ for (const m of html.matchAll(/\b(src|href|srcset)="([^"]+)"/g)) {
   if (m[2].includes("${")) continue; // built in script at runtime
   const parts = m[1] === "srcset" ? m[2].split(",") : [m[2]];
   for (const part of parts) {
-    const url = part.trim().split(/\s+/)[0];
+    let url = part.trim().split(/\s+/)[0];
+    url = url.replace(/^https:\/\/ftaguild\.com\//, "");   // our own domain = local file
     if (!url || /^(https?:|mailto:|tel:|data:|#)/.test(url)) continue;
-    refs.add(url.split(/[?#]/)[0]);
+    const file = url.split(/[?#]/)[0].replace(/^\//, "");
+    if (file) refs.add(file);
+  }
+}
+// og:image and other meta tags pointing at our own domain
+// our own domain anywhere in the page (meta tags, structured data)
+for (const m of html.matchAll(/https:\/\/ftaguild\.com\/([\w.\-\/]+\.\w+)/g)) refs.add(m[1]);
+// icons listed in the web manifest
+if (existsSync(join(DIR, "site.webmanifest"))) {
+  for (const icon of JSON.parse(readFileSync(join(DIR, "site.webmanifest"), "utf8")).icons || []) {
+    refs.add(icon.src.replace(/^\//, ""));
   }
 }
 for (const m of html.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
@@ -38,7 +49,8 @@ for (const f of readdirSync(DIR)) {
 }
 
 // 4. files in public/ that nothing uses (warning only)
-const unused = readdirSync(DIR).filter(f => f !== "index.html" && !refs.has(f));
+const ROOT_FILES = ["index.html", "robots.txt", "sitemap.xml"];
+const unused = readdirSync(DIR).filter(f => !ROOT_FILES.includes(f) && !refs.has(f));
 if (unused.length) console.warn(`Unused files in public/: ${unused.join(", ")}`);
 
 if (errors.length) {
