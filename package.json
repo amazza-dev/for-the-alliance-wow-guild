@@ -1,0 +1,18 @@
+{
+  "name": "for-the-alliance-wow-guild",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for For the Alliance, a World of Warcraft guild on WoW Forever (PvP).",
+  "scripts": {
+    "validate": "html-validate public/index.html",
+    "check:assets": "node scripts/check-site.mjs",
+    "check": "npm run validate && npm run check:assets",
+    "dev": "npx --yes serve public -l 3000"
+  },
+  "devDependencies": {
+    "html-validate": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For the Alliance — WoW Guild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0B1530;
+  --lapis:#2D4FA6;
+  --lapis-2:#3A60C0;
+  --gilt:#E2AE3A;
+  --gilt-soft:#F6D77A;
+  --steel:#B8C3D6;
+  --paper:#F5F7FB;
+  --ink:#1A2140;
+  --muted:#4F5A7A;
+  --crimson:#B3322F;
+  --moss:#3E7D4A;
+  --radius-s:6px;
+  --display:"Alegreya SC", Georgia, serif;
+  --body:"Alegreya Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.125rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:var(--lapis)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gilt);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;margin:0;letter-spacing:.005em}
+h2{font-size:clamp(2rem,4vw,2.75rem);color:var(--midnight)}
+h3{font-size:1.5rem}
+p{margin:0 0 1em}
+.lede{font-size:1.25rem;color:var(--muted);max-width:60ch}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(18,26,58,.94);backdrop-filter:blur(8px);color:#fff}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:60px}
+.brand{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:1.2rem}
+
+.nav ul{list-style:none;display:flex;gap:1.5rem;margin:0;padding:0}
+.nav ul a{color:var(--steel);text-decoration:none;font-weight:500}
+.nav ul a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font:700 1rem/1 var(--body);padding:.85rem 1.25rem;border-radius:var(--radius-s);border:2px solid transparent;text-decoration:none;cursor:pointer;transition:background .15s,color .15s}
+.btn-gold{background:var(--gilt);color:var(--midnight)}
+.btn-gold:hover{background:var(--gilt-soft)}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.nav .btn{padding:.6rem 1rem}
+@media (max-width:820px){.nav ul{display:none}}
+
+/* hero */
+.hero{background:#070D1E;color:#fff;position:relative}
+.hero-art{display:block;width:100%;max-width:1600px;margin:0 auto;animation:rise 1.4s ease-out both}
+.hero-art img{width:100%;height:auto}
+@keyframes rise{from{opacity:0;filter:brightness(.4)}to{opacity:1;filter:none}}
+@media (prefers-reduced-motion:reduce){.hero-art{animation:none}html{scroll-behavior:auto}}
+.hero-bar{background:linear-gradient(180deg,#070D1E,var(--midnight));border-bottom:3px solid var(--gilt)}
+.hero-bar .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem 3rem;align-items:center;padding-block:2.25rem 2.75rem}
+.hero .lede{color:var(--steel);margin:0;font-size:clamp(1.15rem,2vw,1.35rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:flex-end}
+.realm{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.5rem 2rem;color:var(--steel);font-size:1rem}
+.realm b{color:var(--gilt-soft);font-weight:700}
+@media (max-width:760px){
+  .hero-bar .wrap{grid-template-columns:1fr;text-align:center}
+  .cta-row,.realm{justify-content:center}
+}
+
+section{padding-block:clamp(3.5rem,8vw,6rem)}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem 2rem;margin-bottom:2.5rem}
+.section-head p{margin:0}
+.section-head h2{padding-bottom:.4rem;border-bottom:3px solid var(--gilt)}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem)}
+.pillar{position:relative;padding-top:4.25rem}
+.pennant{position:absolute;top:0;left:0;width:44px;height:58px}
+.pillar h3{margin-bottom:.6rem}
+.pillar p{color:var(--muted)}
+.pillar ul{margin:0;padding-left:1.1rem;color:var(--ink)}
+.pillar li{margin:.25rem 0}
+.pillar li::marker{color:var(--gilt)}
+@media (max-width:860px){.pillars{grid-template-columns:1fr}}
+
+/* schedule */
+.schedule-sec{background:#fff;border-block:1px solid #E1E6F0}
+.week{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid #D7DDEA;border-radius:10px;overflow:hidden;background:var(--paper)}
+.day{padding:1rem .85rem 1.25rem;border-right:1px solid #D7DDEA;min-height:180px;display:flex;flex-direction:column;gap:.6rem}
+.day:last-child{border-right:0}
+.day.today{background:#fff;box-shadow:inset 0 4px 0 var(--gilt)}
+.day-name{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--midnight);display:flex;justify-content:space-between;align-items:baseline}
+.day-name small{font-family:var(--body);font-weight:500;font-size:.8rem;color:var(--lapis)}
+.event{border-left:4px solid var(--lapis);background:#fff;padding:.5rem .6rem;border-radius:0 4px 4px 0;font-size:.95rem;line-height:1.3}
+.event b{display:block;font-weight:700}
+.event span{color:var(--muted);font-size:.875rem}
+.event.pvp{border-color:var(--crimson)}
+.event.level{border-color:var(--moss)}
+.event.social{border-color:var(--gilt)}
+.rest{color:#8A93AE;font-style:italic;font-size:.95rem}
+.legend{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:1rem;color:var(--muted);font-size:.95rem}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:.4rem;vertical-align:-1px}
+.tz{font-size:.95rem;color:var(--muted)}
+@media (max-width:900px){
+  .week{grid-template-columns:1fr}
+  .day{border-right:0;border-bottom:1px solid #D7DDEA;min-height:0;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .day:last-child{border-bottom:0}
+  .day-name{width:100%}
+  .event{flex:1 1 200px}
+}
+
+/* how raids work */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid #DDE3EE}
+.steps li:first-child{padding-top:0}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--lapis);line-height:1}
+.steps b{display:block;font-size:1.1rem}
+.steps span{color:var(--muted)}
+.code{background:var(--midnight);color:var(--steel);border-radius:12px;padding:clamp(1.5rem,4vw,2.5rem)}
+.code h3{color:var(--gilt-soft);margin-bottom:1rem}
+.code ul{margin:0;padding:0;list-style:none}
+.code li{padding:.6rem 0 .6rem 1.75rem;position:relative;border-top:1px solid rgba(201,210,227,.15)}
+.code li:first-child{border-top:0}
+.code li::before{content:"";position:absolute;left:0;top:1.05rem;width:10px;height:10px;background:var(--gilt);transform:rotate(45deg)}
+.code strong{color:#fff}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+
+/* officers */
+.officers{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
+.officer{display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid #DDE3EE;border-radius:10px;background:#fff}
+.sigil{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.35rem;color:#fff}
+.officer b{display:block;font-size:1.1rem}
+.officer span{color:var(--muted);font-size:.95rem}
+
+/* faq */
+.faq details{border-bottom:1px solid #DDE3EE}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 2rem 1.1rem 0;font-weight:700;font-size:1.15rem;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.25rem;top:.85rem;font-size:1.6rem;color:var(--lapis);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);max-width:68ch;padding-bottom:.5rem}
+
+/* apply */
+.apply{background:linear-gradient(160deg,var(--lapis),var(--midnight));color:#fff}
+.apply h2{color:#fff}
+.apply .lede{color:var(--steel)}
+.apply-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+form{background:#fff;color:var(--ink);border-radius:12px;padding:clamp(1.25rem,3vw,2rem);display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.25rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field.full{grid-column:1/-1}
+label{font-weight:700;font-size:.95rem}
+label em{font-weight:400;color:var(--muted);font-style:normal}
+input,select,textarea{font:inherit;font-size:1rem;padding:.65rem .75rem;border:1.5px solid #C7CFDF;border-radius:var(--radius-s);background:var(--paper);color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:.5rem}
+.checks label{font-weight:500;display:flex;align-items:center;gap:.4rem;border:1.5px solid #C7CFDF;border-radius:999px;padding:.35rem .8rem;cursor:pointer;background:var(--paper)}
+.checks input{accent-color:var(--lapis);margin:0}
+.checks label:has(input:checked){border-color:var(--lapis);background:#E6ECFA}
+.form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.error{color:var(--crimson);font-weight:500;font-size:.95rem}
+.result{grid-column:1/-1;display:none}
+.result.show{display:block}
+.result pre{white-space:pre-wrap;background:var(--paper);border:1px solid #D7DDEA;border-radius:var(--radius-s);padding:1rem;font:400 .95rem/1.5 var(--body);margin:0 0 .75rem}
+.btn-blue{background:var(--lapis);color:#fff}
+.btn-blue:hover{background:var(--lapis-2)}
+.discord-note{color:var(--steel);margin-top:1.5rem}
+.discord-note code{color:#fff;font-size:1rem}
+@media (max-width:860px){.apply-grid,form{grid-template-columns:1fr}}
+
+footer{background:var(--midnight);color:#8A93AE;font-size:.95rem;padding:2.5rem 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+footer b{color:var(--steel)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.music{position:fixed;right:1rem;bottom:1rem;z-index:30;display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem .6rem .7rem;border-radius:999px;border:2px solid var(--gilt);background:rgba(11,21,48,.94);color:#fff;font:700 .95rem/1 var(--body);cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.music:hover{background:var(--midnight)}
+.music .ic{width:30px;height:30px;border-radius:50%;background:var(--gilt);display:grid;place-items:center}
+.music svg{width:14px;height:14px}
+.music .bars{display:none;gap:2px;align-items:end;height:14px}
+.music .bars i{width:3px;background:var(--midnight);border-radius:1px;animation:eq 1s ease-in-out infinite}
+.music .bars i:nth-child(2){animation-delay:-.4s}.music .bars i:nth-child(3){animation-delay:-.7s}
+.music.playing .bars{display:flex}.music.playing .play{display:none}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+@media (prefers-reduced-motion:reduce){.music .bars i{animation:none;height:10px}}
+@media (max-width:520px){.music .lbl{display:none}.music{padding:.5rem}}
+
+/* ===== intro ===== */
+body.intro-open{overflow:hidden}
+.intro{position:fixed;inset:0;z-index:100;background:radial-gradient(80% 70% at 50% 45%,#172a5a 0%,#0b1631 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(.75rem,2.5vh,1.5rem);padding:1rem;overflow:hidden}
+.intro[hidden]{display:none}
+.embers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.stage{position:relative;width:min(94vw,calc(100vh - 150px),820px);aspect-ratio:1;flex:none}
+.stage .ly{position:absolute;display:block;max-width:none;will-change:transform,opacity}
+.stage .plate{position:absolute;inset:8%;background:radial-gradient(closest-side,rgba(40,70,150,.35),rgba(40,70,150,0));}
+.lion-clip{position:absolute;left:24.219%;top:17.48%;width:52.637%;height:56.641%;clip-path:polygon(39.3% 2.4%,56.6% 2.4%,79.2% 8.1%,86.6% 14.5%,94.6% 32.1%,97.4% 47.6%,93.7% 67.8%,86.6% 86.7%,78.3% 96.7%,49.0% 97.6%,19.7% 96.7%,13.2% 86.7%,6.7% 67.8%,2.6% 47.6%,5.0% 32.1%,13.2% 14.5%,22.8% 8.1%);overflow:hidden}
+.lion-clip .inner{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 45%,#2f53a8,#162a63)}
+.lion-clip img{position:absolute;inset:0;width:100%;height:100%}
+.burst{position:absolute;left:50%;top:55%;width:80%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle,rgba(255,230,150,.95) 0%,rgba(242,190,70,.55) 25%,rgba(242,170,40,0) 62%);mix-blend-mode:screen;opacity:0;pointer-events:none}
+.ring{position:absolute;left:50%;top:55%;width:40%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;border:6px solid rgba(255,220,130,.9);box-shadow:0 0 30px rgba(255,200,90,.8),inset 0 0 30px rgba(255,200,90,.6);opacity:0;pointer-events:none}
+.flash{position:absolute;inset:-10%;background:radial-gradient(circle at 50% 45%,rgba(255,245,215,.95),rgba(255,220,140,0) 60%);mix-blend-mode:screen;opacity:0;pointer-events:none}
+.gleam{position:absolute;inset:0;overflow:hidden;pointer-events:none;mix-blend-mode:screen}
+.gleam::before{content:"";position:absolute;top:-20%;bottom:-20%;width:22%;left:-40%;background:linear-gradient(100deg,transparent,rgba(255,236,180,.55),transparent);transform:skewX(-18deg)}
+.gleam.go::before{animation:gleam 1.3s ease-in-out forwards}
+@keyframes gleam{to{left:130%}}
+.intro-actions{display:flex;flex-direction:column;align-items:center;gap:.6rem;min-height:92px}
+.enter{font:800 clamp(1.15rem,2.6vw,1.45rem)/1 var(--display);letter-spacing:.04em;color:var(--midnight);background:linear-gradient(180deg,#f8dc85,#e2ae3a 55%,#b9861f);border:2px solid #fff3c4;border-radius:8px;padding:1rem 2.4rem;cursor:pointer;box-shadow:0 0 0 4px rgba(226,174,58,.25),0 10px 30px rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .7s,transform .7s,box-shadow .3s;transform:translateY(12px)}
+.enter.show{opacity:1;visibility:visible;transform:none}
+.enter:hover{box-shadow:0 0 0 6px rgba(226,174,58,.4),0 0 40px rgba(242,200,90,.6),0 10px 30px rgba(0,0,0,.5)}
+.enter-note{color:var(--steel);font-size:.95rem;opacity:0;transition:opacity .7s .3s}
+.enter.show + .enter-note{opacity:1}
+.skip{position:absolute;right:1rem;bottom:1rem;background:none;border:1px solid rgba(184,195,214,.4);color:var(--steel);border-radius:999px;padding:.45rem 1rem;font:500 .9rem var(--body);cursor:pointer;transition:opacity .4s}
+.skip:hover{color:#fff;border-color:#fff}
+.skip.gone{opacity:0;pointer-events:none}
+.intro.leaving{animation:leave .9s ease-in forwards}
+@keyframes leave{to{opacity:0;transform:scale(1.06)}}
+</style>
+</head>
+<body class="intro-open">
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="For the Alliance intro">
+  <canvas class="embers" id="embers" aria-hidden="true"></canvas>
+  <div class="stage" id="stage" aria-hidden="true">
+    <div class="plate" id="ly-plate"></div>
+    <img class="ly " id="ly-corners" src="corners.webp" alt="" style="left:0%;top:0%;width:100.000%;height:100.000%">
+    <img class="ly " id="ly-weap_l" src="weap_l.webp" alt="" style="left:0%;top:21.5%;width:31.000%;height:48.333%">
+    <img class="ly " id="ly-weap_r" src="weap_r.webp" alt="" style="left:71.0%;top:19.083%;width:29.000%;height:50.750%">
+    <img class="ly" id="ly-shield_fill" src="shield_fill.webp" alt="" style="left:24.417%;top:19.167%;width:52.25%;height:53%">
+    <div class="lion-clip" id="lionClip"><img id="ly-lion" src="lion.webp" alt=""></div>
+    <img class="ly " id="ly-shield" src="shield.webp" alt="" style="left:10.917%;top:0.417%;width:78.250%;height:65.000%">
+    <img class="ly " id="ly-ribbon" src="ribbon.webp" alt="" style="left:2.167%;top:67.667%;width:95.833%;height:30.750%">
+    <img class="ly " id="ly-w_for" src="w_for.webp" alt="" style="left:5.417%;top:5.417%;width:21.416%;height:14.750%">
+    <img class="ly " id="ly-w_the" src="w_the.webp" alt="" style="left:25.583%;top:5.417%;width:21.500%;height:14.750%">
+    <img class="ly " id="ly-w_alliance" src="w_alliance.webp" alt="" style="left:45.833%;top:5.417%;width:49.000%;height:14.750%">
+    <img class="ly" id="ly-full" src="full.jpg" alt="" style="left:0;top:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(75% 75% at 50% 50%,#000 78%,transparent 100%);mask-image:radial-gradient(75% 75% at 50% 50%,#000 78%,transparent 100%)">
+    <div class="burst" id="burst"></div>
+    <div class="ring" id="ring"></div>
+    <div class="flash" id="flash"></div>
+    <div class="gleam" id="gleam"></div>
+  </div>
+  <div class="intro-actions">
+    <button class="enter" id="enterBtn" type="button">Enter the realm</button>
+    <span class="enter-note">Music will play</span>
+  </div>
+  <button class="skip" id="skipBtn" type="button">Skip intro</button>
+</div>
+
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="crest.jpg" alt="" width="30" height="34" style="border-radius:4px;border:1.5px solid var(--gilt)">
+      For the Alliance
+    </a>
+    <ul>
+      <li><a href="#guild">The guild</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#raids">Raids</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-gold" href="#apply">Apply</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <h1 class="sr-only">For the Alliance, a World of Warcraft guild on WoW Forever (PvP)</h1>
+  <picture class="hero-art">
+    <source media="(max-width:700px)" srcset="banner-square.jpg">
+    <img src="banner-wide.jpg" width="1920" height="1072" alt="For the Alliance guild crest: a roaring golden lion on a blue shield, flanked by swords, axes and hammers, above a banner reading WoW Forever (PvP)">
+  </picture>
+  <div class="hero-bar">
+    <div class="wrap">
+      <p class="lede">A friendly, semi-competitive World of Warcraft guild. We raid on a schedule, run PvP nights, and help every new member level up without going it alone.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#apply">Apply to join</a>
+        <a class="btn btn-ghost" id="discordBtn" href="#">Join our Discord</a>
+      </div>
+      <div class="realm" id="realmInfo"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="guild">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Three things we do well</h2>
+      <p class="lede">Show up for whichever you like. Plenty of members only ever do one.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <svg class="pennant" viewBox="0 0 44 58" aria-hidden="true"><path d="M2 0h40v58L22 44 2 58z" fill="#2D4FA6"/><path d="M14 18l8-8 8 8-8 16z" fill="#E2AE3A"/></svg>
+        <h3>Raiding</h3>
+        <p>Two scheduled nights a week with a set roster, clear strats, and a fair loot system. We push progress without burning anyone out.</p>
+        <ul><li>Sign-ups open a week ahead</li><li>Strats posted before every new boss</li><li>Bench spots rotate fairly</li></ul>
+      </article>
+      <article class="pillar">
+        <svg class="pennant" viewBox="0 0 44 58" aria-hidden="true"><path d="M2 0h40v58L22 44 2 58z" fill="#B3322F"/><path d="M12 12l20 20M32 12L12 32" stroke="#F6D77A" stroke-width="4" stroke-linecap="round"/></svg>
+        <h3>PvP events</h3>
+        <p>Weekly battleground premades, world PvP outings, and the occasional guild duel tournament with gold prizes.</p>
+        <ul><li>Premade battlegrounds on Wednesdays</li><li>Monthly duel tournament</li><li>New PvPers paired with a veteran</li></ul>
+      </article>
+      <article class="pillar">
+        <svg class="pennant" viewBox="0 0 44 58" aria-hidden="true"><path d="M2 0h40v58L22 44 2 58z" fill="#3E7D4A"/><path d="M22 34V12M14 20l8-8 8 8" stroke="#F6D77A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Leveling help</h3>
+        <p>New to the game or rolling an alt? Ask in guild chat and someone will group up, run you through dungeons, or answer questions.</p>
+        <ul><li>Saturday dungeon runs for all levels</li><li>Guild bank bags and gear for new members</li><li>Profession crafting at cost</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="schedule-sec" id="schedule">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>This week in the guild</h2>
+      <p class="tz">All times Eastern (server time). Today is highlighted.</p>
+    </div>
+    <div class="week" id="week"></div>
+    <div class="legend" role="group" aria-label="Event types">
+      <span><i style="background:var(--lapis)"></i>Raid</span>
+      <span><i style="background:var(--crimson)"></i>PvP</span>
+      <span><i style="background:var(--moss)"></i>Leveling</span>
+      <span><i style="background:var(--gilt)"></i>Social</span>
+    </div>
+  </div>
+</section>
+
+<section id="raids">
+  <div class="wrap split">
+    <div>
+      <h2 style="margin-bottom:1.75rem">How raid night works</h2>
+      <ol class="steps">
+        <li><div><b>Sign up in Discord</b><span>React to the raid post by Sunday so leads can build the roster.</span></div></li>
+        <li><div><b>Prep your character</b><span>Bring consumables, repair, and skim the strat post for any new boss.</span></div></li>
+        <li><div><b>Invites go out 15 minutes early</b><span>Be online and in voice. We pull on time.</span></div></li>
+        <li><div><b>Loot is handed out fairly</b><span>We use a points system that rewards attendance. The full rules are pinned in Discord.</span></div></li>
+      </ol>
+    </div>
+    <aside class="code">
+      <h3>The guild code</h3>
+      <ul>
+        <li><strong>Be friendly.</strong> No toxicity in chat, voice, or random groups. You wear our tag everywhere.</li>
+        <li><strong>Competitive, not cutthroat.</strong> We want to win and improve, and we laugh at wipes.</li>
+        <li><strong>Help when you can.</strong> A five-minute answer for a new player builds the guild.</li>
+        <li><strong>Real life comes first.</strong> Can't make raid? Just let an officer know.</li>
+        <li><strong>Respect the guild bank.</strong> Take what you need and give back when you can.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head"><h2>Officers</h2><p class="lede">Message any of us in-game or on Discord.</p></div>
+    <div class="officers" id="officers"></div>
+  </div>
+</section>
+
+<section class="faq" id="faq" style="padding-top:0">
+  <div class="wrap" style="max-width:820px">
+    <h2 style="margin-bottom:1rem">Questions</h2>
+    <details><summary>Do I need to be max level to join?</summary><p>No. We take players at any level, and leveling help is one of the main reasons the guild exists. Raids need max level, but everything else is open to all.</p></details>
+    <details><summary>How much do I have to play?</summary><p>As much or as little as you want. Only raiders on the main roster are asked to attend, and even then we work around real life.</p></details>
+    <details><summary>I've never raided or done PvP. Is that okay?</summary><p>Yes. We explain fights in voice, pair new PvPers with veterans, and nobody gets flamed for learning.</p></details>
+    <details><summary>Do I need a microphone?</summary><p>You'll need to be able to listen in Discord for raids and PvP premades. Talking is optional.</p></details>
+    <details><summary>How do I get an invite?</summary><p>Fill out the application below, copy it, and post it in our Discord's application channel. An officer will reply within a day or two and invite you in-game.</p></details>
+  </div>
+</section>
+
+<section class="apply" id="apply">
+  <div class="wrap apply-grid">
+    <div>
+      <h2>Join the guild</h2>
+      <p class="lede" style="margin-top:1rem">Tell us about your character. When you're done, copy the application and post it in our Discord so an officer can get you an invite.</p>
+      <p class="discord-note" id="discordNote"></p>
+    </div>
+    <form id="applyForm" novalidate>
+      <div class="field"><label for="char">Character name</label><input id="char" name="char" type="text" autocomplete="off" required></div>
+      <div class="field"><label for="disc">Discord username</label><input id="disc" name="disc" type="text" autocomplete="off" required></div>
+      <div class="field"><label for="cls">Class</label>
+        <select id="cls" name="cls" required>
+          <option value="">Choose a class</option>
+          <option>Warrior</option><option>Paladin</option><option>Hunter</option><option>Rogue</option><option>Priest</option><option>Shaman</option><option>Mage</option><option>Warlock</option><option>Monk</option><option>Druid</option><option>Demon Hunter</option><option>Death Knight</option><option>Evoker</option>
+        </select>
+      </div>
+      <div class="field"><label for="lvl">Level</label><input id="lvl" name="lvl" type="number" min="1" max="90" inputmode="numeric"></div>
+      <div class="field full"><span id="intLabel" style="font-weight:700;font-size:.95rem">What are you interested in?</span>
+        <div class="checks" role="group" aria-labelledby="intLabel">
+          <label><input type="checkbox" name="int" value="Raiding">Raiding</label>
+          <label><input type="checkbox" name="int" value="PvP">PvP</label>
+          <label><input type="checkbox" name="int" value="Leveling help">Leveling help</label>
+          <label><input type="checkbox" name="int" value="Helping others level">Helping others level</label>
+          <label><input type="checkbox" name="int" value="Social">Hanging out</label>
+        </div>
+      </div>
+      <div class="field full"><label for="about">Anything else? <em>(optional)</em></label><textarea id="about" name="about" placeholder="Play times, experience, a friend already in the guild..."></textarea></div>
+      <div class="form-actions">
+        <button class="btn btn-blue" type="submit">Create application</button>
+        <span class="error" id="formError" role="alert"></span>
+      </div>
+      <div class="result" id="result" aria-live="polite">
+        <pre id="appText"></pre>
+        <div class="form-actions" style="padding:0">
+          <button class="btn btn-gold" type="button" id="copyBtn">Copy application</button>
+          <span id="copyMsg" style="color:var(--moss);font-weight:700"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>For the Alliance</b> · <span id="footRealm"></span></span>
+    <span>Original guild theme composed for For the Alliance. A fan-run guild site, not affiliated with or endorsed by Blizzard Entertainment.</span>
+  </div>
+</footer>
+
+<button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Play guild theme music">
+  <span class="ic"><svg class="play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5l9 5.5-9 5.5z" fill="#0B1530"/></svg><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></span>
+  <span class="lbl" id="musicLbl">Play guild theme</span>
+</button>
+<audio id="theme" src="theme.mp3" preload="auto" loop></audio>
+
+<script>
+/* ===== Edit guild details here ===== */
+const GUILD = {
+  realm: "WoW Forever",
+  region: "US",
+  faction: "Alliance",
+  realmType: "PvP",
+  discordUrl: "https://discord.gg/qFPcSzSM5Z",
+  officers: [
+    { name: "Guild Master", role: "Guild master", color: "#2D4FA6" },
+    { name: "Raid Lead",    role: "Raid leader",  color: "#B88A22" },
+    { name: "PvP Lead",     role: "PvP captain",  color: "#B3322F" },
+    { name: "Recruiter",    role: "Recruitment & leveling", color: "#3E7D4A" }
+  ],
+  // day: 0 = Sunday ... 6 = Saturday. type: raid | pvp | level | social
+  schedule: [
+    { day: 0, type: "level",  title: "Alt & leveling night", time: "7–10 pm" },
+    { day: 2, type: "raid",   title: "Raid night 1",          time: "8–11 pm" },
+    { day: 3, type: "pvp",    title: "Battleground premades", time: "8–10 pm" },
+    { day: 4, type: "raid",   title: "Raid night 2",          time: "8–11 pm" },
+    { day: 5, type: "social", title: "Guild hangout / fishing", time: "9 pm" },
+    { day: 6, type: "level",  title: "Dungeon runs, all levels", time: "2–5 pm" }
+  ]
+};
+/* =================================== */
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+$("#realmInfo").innerHTML =
+  `<span>Realm <b>${esc(GUILD.realm)} (${esc(GUILD.realmType)})</b></span><span>Region <b>${esc(GUILD.region)}</b></span><span>Faction <b>${esc(GUILD.faction)}</b></span>`;
+$("#footRealm").textContent = `${GUILD.realm} (${GUILD.realmType}), ${GUILD.region}`;
+
+const dBtn = $("#discordBtn");
+if (GUILD.discordUrl) {
+  dBtn.href = GUILD.discordUrl; dBtn.target = "_blank"; dBtn.rel = "noopener";
+  $("#discordNote").innerHTML = `Our Discord: <a style="color:#fff" href="${esc(GUILD.discordUrl)}" target="_blank" rel="noopener">${esc(GUILD.discordUrl)}</a>`;
+} else {
+  dBtn.href = "#apply";
+  $("#discordNote").textContent = "Ask any guild member in-game for the Discord invite link.";
+}
+
+// schedule
+const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const order = [1,2,3,4,5,6,0]; // Monday first
+let nowET;
+try { nowET = new Date(new Date().toLocaleString("en-US",{timeZone:"America/New_York"})); } catch(e){ nowET = new Date(); }
+const today = nowET.getDay();
+const monday = new Date(nowET); monday.setDate(nowET.getDate() - ((today + 6) % 7));
+$("#week").innerHTML = order.map((d, i) => {
+  const date = new Date(monday); date.setDate(monday.getDate() + i);
+  const evs = GUILD.schedule.filter(e => e.day === d);
+  const body = evs.length
+    ? evs.map(e => `<div class="event ${e.type === "raid" ? "" : e.type}"><b>${esc(e.title)}</b><span>${esc(e.time)}</span></div>`).join("")
+    : `<span class="rest">Open night</span>`;
+  return `<div class="day${d === today ? " today" : ""}"><div class="day-name">${days[d]} <small>${date.toLocaleDateString("en-US",{month:"short",day:"numeric"})}${d===today?" · today":""}</small></div>${body}</div>`;
+}).join("");
+
+// officers
+$("#officers").innerHTML = GUILD.officers.map(o =>
+  `<div class="officer"><div class="sigil" style="background:${esc(o.color)}">${esc(o.name.charAt(0))}</div><div><b>${esc(o.name)}</b><span>${esc(o.role)}</span></div></div>`
+).join("");
+
+// application
+const form = $("#applyForm");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = new FormData(form);
+  const missing = [];
+  if (!f.get("char").trim()) missing.push("character name");
+  if (!f.get("disc").trim()) missing.push("Discord username");
+  if (!f.get("cls")) missing.push("class");
+  if (missing.length) { $("#formError").textContent = "Add your " + missing.join(", ") + " to continue."; $("#result").classList.remove("show"); return; }
+  $("#formError").textContent = "";
+  const ints = f.getAll("int");
+  const text = [
+    "**Guild application: For the Alliance**",
+    `Character: ${f.get("char").trim()}`,
+    `Class: ${f.get("cls")}${f.get("lvl") ? " (level " + f.get("lvl") + ")" : ""}`,
+    `Discord: ${f.get("disc").trim()}`,
+    `Interested in: ${ints.length ? ints.join(", ") : "Not sure yet"}`,
+    f.get("about").trim() ? `About me: ${f.get("about").trim()}` : ""
+  ].filter(Boolean).join("\n");
+  $("#appText").textContent = text;
+  $("#copyMsg").textContent = "";
+  $("#result").classList.add("show");
+});
+$("#copyBtn").addEventListener("click", async () => {
+  const text = $("#appText").textContent;
+  try { await navigator.clipboard.writeText(text); $("#copyMsg").textContent = "Copied. Paste it in our Discord."; }
+  catch (err) {
+    const r = document.createRange(); r.selectNodeContents($("#appText"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    $("#copyMsg").textContent = "Text selected. Press Ctrl+C (or ⌘C) to copy.";
+  }
+});
+
+// ===== guild theme music =====
+const audio = $("#theme"), mBtn = $("#musicBtn"), mLbl = $("#musicLbl");
+const VOLUME = 0.34;
+audio.volume = VOLUME;
+let userPaused = false;
+function setPlaying(on){
+  mBtn.classList.toggle("playing", on);
+  mBtn.setAttribute("aria-pressed", on);
+  mBtn.setAttribute("aria-label", on ? "Pause guild theme music" : "Play guild theme music");
+  mLbl.textContent = on ? "Pause music" : "Play guild theme";
+}
+function fadeIn(){
+  audio.volume = 0;
+  const step = setInterval(() => {
+    audio.volume = Math.min(VOLUME, audio.volume + VOLUME / 30);
+    if (audio.volume >= VOLUME) clearInterval(step);
+  }, 100);
+}
+async function startMusic(){
+  if (userPaused || !audio.paused) return true;
+  try { audio.volume = 0; await audio.play(); fadeIn(); setPlaying(true); return true; }
+  catch (e) { audio.volume = VOLUME; return false; }
+}
+mBtn.addEventListener("click", async () => {
+  if (audio.paused) {
+    userPaused = false;
+    try { await audio.play(); audio.volume = VOLUME; setPlaying(true); }
+    catch (e) { mLbl.textContent = "Music unavailable here"; }
+  } else { audio.pause(); userPaused = true; setPlaying(false); }
+});
+
+// ===== animated intro =====
+const intro = $("#intro"), stage = $("#stage"), enterBtn = $("#enterBtn"), skipBtn = $("#skipBtn");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const anims = [];
+const el = id => document.getElementById(id);
+function at(node, frames, start, dur, easing = "cubic-bezier(.2,.8,.2,1)", fill = "both") {
+  const a = node.animate(frames, { delay: start, duration: dur, easing, fill });
+  anims.push(a); return a;
+}
+const BOUNCE = "cubic-bezier(.34,1.56,.64,1)";
+function shake(start, power = 10, dur = 500) {
+  const f = [];
+  for (let i = 0; i <= 10; i++) {
+    const p = power * (1 - i / 10);
+    f.push({ transform: i === 10 ? "translate(0,0)" : `translate(${(Math.random() * 2 - 1) * p}px,${(Math.random() * 2 - 1) * p}px)` });
+  }
+  at(stage, f, start, dur, "linear", "none");
+}
+let shownEnter = false;
+function showEnter(){
+  if (shownEnter) return; shownEnter = true;
+  enterBtn.classList.add("show");
+  skipBtn.classList.add("gone");
+  setTimeout(() => enterBtn.focus({ preventScroll: true }), 50);
+}
+
+// ember particles
+const cv = el("embers"), cx = cv.getContext("2d");
+let parts = [], running = true;
+function sizeCanvas(){ cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+sizeCanvas(); addEventListener("resize", sizeCanvas);
+function spawn(n, burst){
+  const r = stage.getBoundingClientRect();
+  for (let i = 0; i < n; i++) {
+    const ang = Math.random() * Math.PI * 2, sp = 2 + Math.random() * 7;
+    parts.push(burst
+      ? { x: r.left + r.width * .5, y: r.top + r.height * .55, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - 1, life: 1, s: 1 + Math.random() * 2.5 }
+      : { x: Math.random() * innerWidth, y: innerHeight + 10, vx: (Math.random() - .5) * .6, vy: -(.6 + Math.random() * 1.6), life: 1, s: .8 + Math.random() * 2 });
+  }
+}
+function tick(){
+  if (!running) return;
+  if (!reduce && parts.length < 90 && Math.random() < .5) spawn(1, false);
+  cx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  parts = parts.filter(p => p.life > 0 && p.y > -20);
+  for (const p of parts) {
+    p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy = p.vy * .985 - .01; p.life -= .0045;
+    const g = cx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.s * 4);
+    g.addColorStop(0, `rgba(255,214,120,${.9 * p.life})`); g.addColorStop(1, "rgba(255,160,40,0)");
+    cx.fillStyle = g; cx.beginPath(); cx.arc(p.x, p.y, p.s * 4, 0, Math.PI * 2); cx.fill();
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+function playIntro(){
+  // 1. darkness to stage, corners glint in
+  at(el("ly-plate"), [{ opacity: 0 }, { opacity: 1 }], 0, 900);
+  at(el("ly-corners"), [{ opacity: 0, transform: "scale(1.05)" }, { opacity: 1, transform: "scale(1)" }], 300, 1200);
+  // 2. shield slams down
+  const shieldIn = [{ opacity: 0, transform: "translateY(-18%) scale(1.25)" }, { opacity: 1, transform: "translateY(0) scale(1)" }];
+  at(el("ly-shield"), shieldIn, 700, 800, BOUNCE);
+  at(el("ly-shield_fill"), shieldIn, 700, 800, BOUNCE);
+  at(el("lionClip"), [{ opacity: 0, transform: "translateY(-18%) scale(1.25)" }, { opacity: 1, transform: "translateY(0) scale(1)" }], 700, 800, BOUNCE);
+  shake(1450, 7, 400);
+  // 3. lion rises out of the shield
+  at(el("ly-lion"), [{ transform: "translateY(85%) scale(.9)", filter: "brightness(.25)" }, { transform: "translateY(0) scale(1)", filter: "brightness(1)" }], 1800, 1500, "cubic-bezier(.16,.84,.3,1)");
+  // 4. ROAR
+  at(el("lionClip"), [{ transform: "scale(1)" }, { transform: "scale(1.09)", offset: .25 }, { transform: "scale(.98)", offset: .6 }, { transform: "scale(1)" }], 3400, 700, "ease-out", "forwards");
+  at(el("ly-lion"), [{ filter: "brightness(1)" }, { filter: "brightness(1.45) saturate(1.2)", offset: .25 }, { filter: "brightness(1)" }], 3400, 900, "ease-out", "forwards");
+  at(el("burst"), [{ opacity: 0, transform: "scale(.3)" }, { opacity: .95, transform: "scale(1)", offset: .2 }, { opacity: 0, transform: "scale(1.7)" }], 3400, 1100, "ease-out");
+  at(el("ring"), [{ opacity: .95, transform: "scale(.2)" }, { opacity: 0, transform: "scale(3)" }], 3420, 1000, "cubic-bezier(.1,.7,.3,1)", "forwards");
+  shake(3400, 16, 750);
+  setTimeout(() => { if (!reduce && !shownEnter) spawn(140, true); }, 3450);
+  // 5. title words drop in
+  ["ly-w_for", "ly-w_the", "ly-w_alliance"].forEach((id, i) => {
+    at(el(id), [{ opacity: 0, transform: `translateY(-160%) rotate(${i % 2 ? 5 : -5}deg)` }, { opacity: 1, transform: "translateY(0) rotate(0)" }], 4300 + i * 280, 650, BOUNCE);
+  });
+  shake(5150, 6, 350);
+  // 6. ribbon unfurls
+  at(el("ly-ribbon"), [{ opacity: 0, clipPath: "inset(0 50% 0 50%)", transform: "scaleY(.6)" }, { opacity: 1, clipPath: "inset(0 0% 0 0%)", transform: "scaleY(1)" }], 5300, 850, "cubic-bezier(.3,1.3,.5,1)");
+  // 7. weapons sweep in from the edges and lock to the shield
+  at(el("ly-weap_l"), [{ opacity: 0, transform: "translateX(-130%) rotate(-28deg)" }, { opacity: 1, transform: "translateX(0) rotate(0)" }], 6200, 700, "cubic-bezier(.2,.9,.25,1.12)");
+  at(el("ly-weap_r"), [{ opacity: 0, transform: "translateX(130%) rotate(28deg)" }, { opacity: 1, transform: "translateX(0) rotate(0)" }], 6200, 700, "cubic-bezier(.2,.9,.25,1.12)");
+  at(el("flash"), [{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 0 }], 6820, 700, "ease-out");
+  shake(6850, 14, 600);
+  // 8. settle on the finished banner, gleam, then Enter
+  at(el("ly-full"), [{ opacity: 0 }, { opacity: 1 }], 7300, 900, "ease-in-out");
+  setTimeout(() => el("gleam").classList.add("go"), 7700);
+  setTimeout(showEnter, 8600);
+}
+function finishIntro(){
+  anims.forEach(a => { try { a.finish(); } catch (e) {} });
+  el("ly-full").style.opacity = 1;
+  showEnter();
+}
+skipBtn.addEventListener("click", finishIntro);
+enterBtn.addEventListener("click", async () => {
+  userPaused = false;
+  await startMusic();
+  intro.classList.add("leaving");
+  setTimeout(() => {
+    intro.hidden = true; running = false;
+    document.body.classList.remove("intro-open");
+  }, 850);
+});
+intro.addEventListener("keydown", e => { if (e.key === "Escape" && !shownEnter) finishIntro(); });
+
+// start once images are ready (or after 2.5 s regardless)
+const imgs = [...stage.querySelectorAll("img")];
+let started = false;
+function go(){ if (started) return; started = true; reduce ? finishIntro() : playIntro(); startMusic(); }
+Promise.all(imgs.map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))).then(go);
+setTimeout(go, 2500);
+// set every layer to its starting state immediately so nothing flashes before the timeline begins
+imgs.concat([el("ly-plate"), el("lionClip")]).forEach(n => { if (n.id !== "ly-lion") n.style.opacity = 0; });
+</script>
+</body>
+</html>
